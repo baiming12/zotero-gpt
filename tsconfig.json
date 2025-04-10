@@ -1,12 +1,12 @@
 {
   "compilerOptions": {
-    "experimentalDecorators": true,
+    "target": "es6",
     "module": "commonjs",
-    "target": "ES2016",
-    "resolveJsonModule": true,
-    "skipLibCheck": true,
-    "strict": true
+    "outDir": "chrome/content/zoterogpt",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true
   },
-  "include": ["src", "typing", "node_modules/zotero-types"],
-  "exclude": ["builds", "addon"]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
 }

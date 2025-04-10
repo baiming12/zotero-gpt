@@ -14,7 +14,8 @@
   "scripts": {
     "build-dev": "cross-env NODE_ENV=development node scripts/build.js",
     "build-prod": "cross-env NODE_ENV=production node scripts/build.js",
-    "build": "concurrently -c auto npm:build-prod npm:tsc",
+    "build": "concurrently -c auto npm:build-prod npm:tsc && npm run pack",
+    "pack": "zip -r addon.xpi bootstrap.js chrome/ chrome.manifest install.rdf -x '*.git*' 'node_modules/*'",
     "tsc": "tsc --noEmit",
     "start-z6": "node scripts/start.js --z 6",
     "start-z7": "node scripts/start.js --z 7",
