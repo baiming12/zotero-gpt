@@ -3,9 +3,10 @@ import { getString, initLocale } from "./modules/locale";
 import Views from "./modules/views";
 import Utils from "./modules/utils";
 import { initValidation } from "../../validation/core";
+import Addon from "./addon"; // 导入 Addon 类型
 
-async function onStartup() {
-  initValidation(config.addonRef); 
+async function onStartup(this: Addon) {
+  initValidation(config.addonRef);
   await Promise.all([
     Zotero.initializationPromise,
     Zotero.unlockPromise,
@@ -18,11 +19,13 @@ async function onStartup() {
   );
 
   Zotero[config.addonInstance].views = new Views();
-
   Zotero[config.addonInstance].utils = new Utils();
+
+  // 注册菜单项以支持 Grok 3 API 调用
+  this.registerMenu();
 }
 
-function onShutdown(): void {
+function onShutdown(this: Addon): void {
   ztoolkit.unregisterAll();
   // Remove addon object
   addon.data.alive = false;
